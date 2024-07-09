@@ -14,6 +14,9 @@ import (
 type ProviderConfigSpec struct {
 	// Credentials required to authenticate to this provider.
 	Credentials ProviderCredentials `json:"credentials"`
+
+	// +kubebuilder:validation:Optional
+	ReconciliationPolicies []ReconciliationPolicy `json:"reconciliationPolicies,omitempty"`
 }
 
 // ProviderCredentials required to authenticate.
@@ -23,6 +26,17 @@ type ProviderCredentials struct {
 	Source xpv1.CredentialsSource `json:"source"`
 
 	xpv1.CommonCredentialSelectors `json:",inline"`
+}
+
+type ReconciliationPolicy struct {
+	Target       GroupKindName    `json:"target"`
+	PollInterval *metav1.Duration `json:"pollInterval,omitempty"`
+}
+
+type GroupKindName struct {
+	Group string  `json:"group"`
+	Kind  *string `json:"kind,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 // A ProviderConfigStatus reflects the observed state of a ProviderConfig.

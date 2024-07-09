@@ -32,6 +32,11 @@ func (mg *Member) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetails
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
+// GetReconciliationPolicy of this Member.
+func (mg *Member) GetReconciliationPolicy() *xpv1.ReconciliationPolicy {
+	return mg.Spec.ReconciliationPolicy
+}
+
 // GetWriteConnectionSecretToReference of this Member.
 func (mg *Member) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -60,6 +65,11 @@ func (mg *Member) SetProviderConfigReference(r *xpv1.Reference) {
 // SetPublishConnectionDetailsTo of this Member.
 func (mg *Member) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetReconciliationPolicy of this Member.
+func (mg *Member) SetReconciliationPolicy(r *xpv1.ReconciliationPolicy) {
+	mg.Spec.ReconciliationPolicy = r
 }
 
 // SetWriteConnectionSecretToReference of this Member.
@@ -92,6 +102,11 @@ func (mg *Unit) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
+// GetReconciliationPolicy of this Unit.
+func (mg *Unit) GetReconciliationPolicy() *xpv1.ReconciliationPolicy {
+	return mg.Spec.ReconciliationPolicy
+}
+
 // GetWriteConnectionSecretToReference of this Unit.
 func (mg *Unit) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -120,6 +135,11 @@ func (mg *Unit) SetProviderConfigReference(r *xpv1.Reference) {
 // SetPublishConnectionDetailsTo of this Unit.
 func (mg *Unit) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetReconciliationPolicy of this Unit.
+func (mg *Unit) SetReconciliationPolicy(r *xpv1.ReconciliationPolicy) {
+	mg.Spec.ReconciliationPolicy = r
 }
 
 // SetWriteConnectionSecretToReference of this Unit.

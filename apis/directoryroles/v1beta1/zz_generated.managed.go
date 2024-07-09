@@ -32,6 +32,11 @@ func (mg *CustomDirectoryRole) GetPublishConnectionDetailsTo() *xpv1.PublishConn
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
+// GetReconciliationPolicy of this CustomDirectoryRole.
+func (mg *CustomDirectoryRole) GetReconciliationPolicy() *xpv1.ReconciliationPolicy {
+	return mg.Spec.ReconciliationPolicy
+}
+
 // GetWriteConnectionSecretToReference of this CustomDirectoryRole.
 func (mg *CustomDirectoryRole) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -60,6 +65,11 @@ func (mg *CustomDirectoryRole) SetProviderConfigReference(r *xpv1.Reference) {
 // SetPublishConnectionDetailsTo of this CustomDirectoryRole.
 func (mg *CustomDirectoryRole) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetReconciliationPolicy of this CustomDirectoryRole.
+func (mg *CustomDirectoryRole) SetReconciliationPolicy(r *xpv1.ReconciliationPolicy) {
+	mg.Spec.ReconciliationPolicy = r
 }
 
 // SetWriteConnectionSecretToReference of this CustomDirectoryRole.
@@ -92,6 +102,11 @@ func (mg *Role) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
+// GetReconciliationPolicy of this Role.
+func (mg *Role) GetReconciliationPolicy() *xpv1.ReconciliationPolicy {
+	return mg.Spec.ReconciliationPolicy
+}
+
 // GetWriteConnectionSecretToReference of this Role.
 func (mg *Role) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -120,6 +135,11 @@ func (mg *Role) SetProviderConfigReference(r *xpv1.Reference) {
 // SetPublishConnectionDetailsTo of this Role.
 func (mg *Role) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetReconciliationPolicy of this Role.
+func (mg *Role) SetReconciliationPolicy(r *xpv1.ReconciliationPolicy) {
+	mg.Spec.ReconciliationPolicy = r
 }
 
 // SetWriteConnectionSecretToReference of this Role.
@@ -152,6 +172,11 @@ func (mg *RoleAssignment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectio
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
+// GetReconciliationPolicy of this RoleAssignment.
+func (mg *RoleAssignment) GetReconciliationPolicy() *xpv1.ReconciliationPolicy {
+	return mg.Spec.ReconciliationPolicy
+}
+
 // GetWriteConnectionSecretToReference of this RoleAssignment.
 func (mg *RoleAssignment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -180,6 +205,11 @@ func (mg *RoleAssignment) SetProviderConfigReference(r *xpv1.Reference) {
 // SetPublishConnectionDetailsTo of this RoleAssignment.
 func (mg *RoleAssignment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetReconciliationPolicy of this RoleAssignment.
+func (mg *RoleAssignment) SetReconciliationPolicy(r *xpv1.ReconciliationPolicy) {
+	mg.Spec.ReconciliationPolicy = r
 }
 
 // SetWriteConnectionSecretToReference of this RoleAssignment.

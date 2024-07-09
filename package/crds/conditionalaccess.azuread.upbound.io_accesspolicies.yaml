@@ -950,6 +950,11 @@ spec:
                 required:
                 - name
                 type: object
+              reconciliationPolicy:
+                properties:
+                  pollInterval:
+                    type: string
+                type: object
               writeConnectionSecretToRef:
                 description: |-
                   WriteConnectionSecretToReference specifies the namespace and name of a
@@ -2290,6 +2295,11 @@ spec:
                     type: string
                 required:
                 - name
+                type: object
+              reconciliationPolicy:
+                properties:
+                  pollInterval:
+                    type: string
                 type: object
               writeConnectionSecretToRef:
                 description: |-

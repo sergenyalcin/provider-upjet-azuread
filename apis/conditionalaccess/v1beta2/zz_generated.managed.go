@@ -32,6 +32,11 @@ func (mg *AccessPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionD
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
+// GetReconciliationPolicy of this AccessPolicy.
+func (mg *AccessPolicy) GetReconciliationPolicy() *xpv1.ReconciliationPolicy {
+	return mg.Spec.ReconciliationPolicy
+}
+
 // GetWriteConnectionSecretToReference of this AccessPolicy.
 func (mg *AccessPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -60,6 +65,11 @@ func (mg *AccessPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 // SetPublishConnectionDetailsTo of this AccessPolicy.
 func (mg *AccessPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetReconciliationPolicy of this AccessPolicy.
+func (mg *AccessPolicy) SetReconciliationPolicy(r *xpv1.ReconciliationPolicy) {
+	mg.Spec.ReconciliationPolicy = r
 }
 
 // SetWriteConnectionSecretToReference of this AccessPolicy.
@@ -92,6 +102,11 @@ func (mg *Location) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetai
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
+// GetReconciliationPolicy of this Location.
+func (mg *Location) GetReconciliationPolicy() *xpv1.ReconciliationPolicy {
+	return mg.Spec.ReconciliationPolicy
+}
+
 // GetWriteConnectionSecretToReference of this Location.
 func (mg *Location) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -120,6 +135,11 @@ func (mg *Location) SetProviderConfigReference(r *xpv1.Reference) {
 // SetPublishConnectionDetailsTo of this Location.
 func (mg *Location) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetReconciliationPolicy of this Location.
+func (mg *Location) SetReconciliationPolicy(r *xpv1.ReconciliationPolicy) {
+	mg.Spec.ReconciliationPolicy = r
 }
 
 // SetWriteConnectionSecretToReference of this Location.

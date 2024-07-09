@@ -32,6 +32,11 @@ func (mg *PermissionGrant) GetPublishConnectionDetailsTo() *xpv1.PublishConnecti
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
+// GetReconciliationPolicy of this PermissionGrant.
+func (mg *PermissionGrant) GetReconciliationPolicy() *xpv1.ReconciliationPolicy {
+	return mg.Spec.ReconciliationPolicy
+}
+
 // GetWriteConnectionSecretToReference of this PermissionGrant.
 func (mg *PermissionGrant) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -60,6 +65,11 @@ func (mg *PermissionGrant) SetProviderConfigReference(r *xpv1.Reference) {
 // SetPublishConnectionDetailsTo of this PermissionGrant.
 func (mg *PermissionGrant) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetReconciliationPolicy of this PermissionGrant.
+func (mg *PermissionGrant) SetReconciliationPolicy(r *xpv1.ReconciliationPolicy) {
+	mg.Spec.ReconciliationPolicy = r
 }
 
 // SetWriteConnectionSecretToReference of this PermissionGrant.

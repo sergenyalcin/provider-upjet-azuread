@@ -32,6 +32,11 @@ func (mg *ClaimsMappingPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConn
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
+// GetReconciliationPolicy of this ClaimsMappingPolicy.
+func (mg *ClaimsMappingPolicy) GetReconciliationPolicy() *xpv1.ReconciliationPolicy {
+	return mg.Spec.ReconciliationPolicy
+}
+
 // GetWriteConnectionSecretToReference of this ClaimsMappingPolicy.
 func (mg *ClaimsMappingPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -60,6 +65,11 @@ func (mg *ClaimsMappingPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 // SetPublishConnectionDetailsTo of this ClaimsMappingPolicy.
 func (mg *ClaimsMappingPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetReconciliationPolicy of this ClaimsMappingPolicy.
+func (mg *ClaimsMappingPolicy) SetReconciliationPolicy(r *xpv1.ReconciliationPolicy) {
+	mg.Spec.ReconciliationPolicy = r
 }
 
 // SetWriteConnectionSecretToReference of this ClaimsMappingPolicy.

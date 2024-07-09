@@ -107,6 +107,26 @@ spec:
                 required:
                 - source
                 type: object
+              reconciliationPolicies:
+                items:
+                  properties:
+                    pollInterval:
+                      type: string
+                    target:
+                      properties:
+                        group:
+                          type: string
+                        kind:
+                          type: string
+                        name:
+                          type: string
+                      required:
+                      - group
+                      type: object
+                  required:
+                  - target
+                  type: object
+                type: array
             required:
             - credentials
             type: object

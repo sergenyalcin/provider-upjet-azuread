@@ -9,7 +9,7 @@ metadata:
     meta.upbound.io/example-id: applications/v1beta1/application
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: reconciliation-test2
 spec:
   forProvider:
-    displayName: example-${Rand.RFC1123Subdomain}
+    displayName: reconciliation-test2

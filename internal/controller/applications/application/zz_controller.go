@@ -7,6 +7,7 @@
 package application
 
 import (
+	"github.com/upbound/provider-azuread/internal/hooks"
 	"time"
 
 	"github.com/crossplane/crossplane-runtime/pkg/connection"
@@ -52,7 +53,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		managed.WithPollInterval(o.PollInterval),
 	}
 	if o.PollJitter != 0 {
-		opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
+		opts = append(opts, hooks.WithCustomPollInterval(mgr.GetClient(), o.Logger, o.PollJitter))
 	}
 	if o.Features.Enabled(features.EnableBetaManagementPolicies) {
 		opts = append(opts, managed.WithManagementPolicies())
