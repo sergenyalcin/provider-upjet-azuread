@@ -4,7 +4,9 @@
 
 package applications
 
-import "github.com/crossplane/upjet/v2/pkg/config"
+import (
+	"github.com/crossplane/upjet/v2/pkg/config"
+)
 
 const group = "applications"
 

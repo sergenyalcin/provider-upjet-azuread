@@ -275,7 +275,7 @@ spec:
                       Specifies whether this application supports device authentication without a user. Defaults to false.
                       Specifies whether this application supports device authentication without a user.
                     type: boolean
-                  displayName:
+                  displayNameChanges:
                     description: |-
                       The display name for the application.
                       The display name for the application
@@ -836,7 +836,7 @@ spec:
                       Specifies whether this application supports device authentication without a user. Defaults to false.
                       Specifies whether this application supports device authentication without a user.
                     type: boolean
-                  displayName:
+                  displayNameChanges:
                     description: |-
                       The display name for the application.
                       The display name for the application
@@ -1267,11 +1267,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.displayName is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
-                || (has(self.initProvider) && has(self.initProvider.displayName))'
           status:
             description: ApplicationStatus defines the observed state of Application.
             properties:
@@ -1419,7 +1414,7 @@ spec:
                       Whether Microsoft has disabled the registered application. If the application is disabled, this will be a string indicating the status/reason, e.g. DisabledDueToViolationOfServicesAgreement
                       Whether Microsoft has disabled the registered application
                     type: string
-                  displayName:
+                  displayNameChanges:
                     description: |-
                       The display name for the application.
                       The display name for the application

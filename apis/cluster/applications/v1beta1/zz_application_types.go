@@ -266,7 +266,7 @@ type ApplicationInitParameters struct {
 
 	// The display name for the application.
 	// The display name for the application
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+	DisplayNameChanges *string `json:"displayNameChanges,omitempty" tf:"display_name_changes,omitempty"`
 
 	// Specifies whether the application is a public client. Appropriate for apps using token grant flows that don't use a redirect URI. Defaults to false.
 	// Specifies whether the application is a public client. Appropriate for apps using token grant flows that don't use a redirect URI
@@ -391,7 +391,7 @@ type ApplicationObservation struct {
 
 	// The display name for the application.
 	// The display name for the application
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+	DisplayNameChanges *string `json:"displayNameChanges,omitempty" tf:"display_name_changes,omitempty"`
 
 	// Specifies whether the application is a public client. Appropriate for apps using token grant flows that don't use a redirect URI. Defaults to false.
 	// Specifies whether the application is a public client. Appropriate for apps using token grant flows that don't use a redirect URI
@@ -527,7 +527,7 @@ type ApplicationParameters struct {
 	// The display name for the application.
 	// The display name for the application
 	// +kubebuilder:validation:Optional
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+	DisplayNameChanges *string `json:"displayNameChanges,omitempty" tf:"display_name_changes,omitempty"`
 
 	// Specifies whether the application is a public client. Appropriate for apps using token grant flows that don't use a redirect URI. Defaults to false.
 	// Specifies whether the application is a public client. Appropriate for apps using token grant flows that don't use a redirect URI
@@ -1271,9 +1271,8 @@ type ApplicationStatus struct {
 type Application struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || (has(self.initProvider) && has(self.initProvider.displayName))",message="spec.forProvider.displayName is a required parameter"
-	Spec   ApplicationSpec   `json:"spec"`
-	Status ApplicationStatus `json:"status,omitempty"`
+	Spec              ApplicationSpec   `json:"spec"`
+	Status            ApplicationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

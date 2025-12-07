@@ -1,0 +1,112 @@
+{
+  "applications.azuread.upbound.io/Application": {
+    "versions": {
+      "v1beta2": {
+        "oldVersion": "v1beta1",
+        "newVersion": "v1beta2",
+        "changes": [
+          {
+            "path": "status.atProvider.displayName",
+            "pathParts": [
+              "status",
+              "atProvider",
+              "displayName"
+            ],
+            "changeType": "field_added"
+          },
+          {
+            "path": "status.atProvider.displayNameChanges",
+            "pathParts": [
+              "status",
+              "atProvider",
+              "displayNameChanges"
+            ],
+            "changeType": "field_deleted"
+          },
+          {
+            "path": "spec.initProvider.displayName",
+            "pathParts": [
+              "spec",
+              "initProvider",
+              "displayName"
+            ],
+            "changeType": "field_added"
+          },
+          {
+            "path": "spec.initProvider.displayNameChanges",
+            "pathParts": [
+              "spec",
+              "initProvider",
+              "displayNameChanges"
+            ],
+            "changeType": "field_deleted"
+          },
+          {
+            "path": "spec.forProvider.displayName",
+            "pathParts": [
+              "spec",
+              "forProvider",
+              "displayName"
+            ],
+            "changeType": "field_added"
+          },
+          {
+            "path": "spec.forProvider.displayNameChanges",
+            "pathParts": [
+              "spec",
+              "forProvider",
+              "displayNameChanges"
+            ],
+            "changeType": "field_deleted"
+          }
+        ]
+      }
+    }
+  },
+  "groups.azuread.upbound.io/Group": {
+    "versions": {
+      "v1beta2": {
+        "oldVersion": "v1beta1",
+        "newVersion": "v1beta2",
+        "changes": [
+          {
+            "path": "spec.forProvider.membersRefs",
+            "pathParts": [
+              "spec",
+              "forProvider",
+              "membersRefs"
+            ],
+            "changeType": "field_added"
+          },
+          {
+            "path": "spec.forProvider.membersSelector",
+            "pathParts": [
+              "spec",
+              "forProvider",
+              "membersSelector"
+            ],
+            "changeType": "field_added"
+          },
+          {
+            "path": "spec.initProvider.membersSelector",
+            "pathParts": [
+              "spec",
+              "initProvider",
+              "membersSelector"
+            ],
+            "changeType": "field_added"
+          },
+          {
+            "path": "spec.initProvider.membersRefs",
+            "pathParts": [
+              "spec",
+              "initProvider",
+              "membersRefs"
+            ],
+            "changeType": "field_added"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -768,8 +768,8 @@ func (in *ApplicationInitParameters) DeepCopyInto(out *ApplicationInitParameters
 		*out = new(bool)
 		**out = **in
 	}
-	if in.DisplayName != nil {
-		in, out := &in.DisplayName, &out.DisplayName
+	if in.DisplayNameChanges != nil {
+		in, out := &in.DisplayNameChanges, &out.DisplayNameChanges
 		*out = new(string)
 		**out = **in
 	}
@@ -1023,8 +1023,8 @@ func (in *ApplicationObservation) DeepCopyInto(out *ApplicationObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.DisplayName != nil {
-		in, out := &in.DisplayName, &out.DisplayName
+	if in.DisplayNameChanges != nil {
+		in, out := &in.DisplayNameChanges, &out.DisplayNameChanges
 		*out = new(string)
 		**out = **in
 	}
@@ -1256,8 +1256,8 @@ func (in *ApplicationParameters) DeepCopyInto(out *ApplicationParameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.DisplayName != nil {
-		in, out := &in.DisplayName, &out.DisplayName
+	if in.DisplayNameChanges != nil {
+		in, out := &in.DisplayNameChanges, &out.DisplayNameChanges
 		*out = new(string)
 		**out = **in
 	}

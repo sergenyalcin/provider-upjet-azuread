@@ -9,7 +9,7 @@ metadata:
     meta.upbound.io/example-id: applications/v1beta1/application
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: test-sergen-conversion
 spec:
   forProvider:
-    displayName: example-${Rand.RFC1123Subdomain}
+    displayName: test-sergen-conversion
