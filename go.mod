@@ -27,6 +27,8 @@ require (
 	sigs.k8s.io/controller-tools v0.18.0
 )
 
+replace github.com/crossplane/upjet/v2 => github.com/sergenyalcin/upjet/v2 v2.0.0-20260111195252-3c580fa64595
+
 require (
 	github.com/ProtonMail/go-crypto v1.2.0 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect

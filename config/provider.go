@@ -6,10 +6,10 @@ package config
 
 import (
 	"context"
-	"strings"
-
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
+	"fmt"
+	"strings"
 
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/config/conversion"
@@ -172,24 +172,27 @@ func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
 		if _, ok := oldSLAPIs[name]; ok {
 			r.Version = "v1beta2"
 			r.PreviousVersions = []string{"v1beta1"}
-			// we would like to set the storage version to v1beta1 to facilitate
-			// downgrades.
-			r.SetCRDStorageVersion("v1beta1")
+			r.SetCRDStorageVersion(r.Version)
+			r.DeprecatedVersions = map[string]ujconfig.VersionDeprecation{
+				"v1beta1": {
+					Warning:               fmt.Sprintf("Deprecated, please use %s.", r.Version),
+					DeprecatedInRelease:   "v2.3.0",
+					RemovalPlannedRelease: "v2.6.0",
+				},
+			}
+			if r.Name == "azuread_group" {
+				r.ServedVersions = []string{r.Version}
+			}
 			// because the controller reconciles on the API version with the singleton list API,
 			// no need for a Terraform conversion.
-			r.ControllerReconcileVersion = "v1beta1"
+			r.ControllerReconcileVersion = r.Version
 			r.Conversions = []conversion.Conversion{
 				conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
 				conversion.NewSingletonListConversion("v1beta1", "v1beta2", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
 				conversion.NewSingletonListConversion("v1beta2", "v1beta1", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList)}
-		} else {
-			// the controller will be reconciling on the CRD API version
-			// with the converted API (with embedded objects in place of
-			// singleton lists), so we need the appropriate Terraform
-			// converter in this case.
-			r.TerraformConversions = []ujconfig.TerraformConversion{
-				ujconfig.NewTFSingletonConversion(),
-			}
+		}
+		r.TerraformConversions = []ujconfig.TerraformConversion{
+			ujconfig.NewTFSingletonConversion(),
 		}
 		pc.Resources[name] = r
 	}
