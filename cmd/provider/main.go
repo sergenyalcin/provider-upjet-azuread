@@ -32,9 +32,11 @@ import (
 	authv1 "k8s.io/api/authorization/v1"
 	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
+	"k8s.io/client-go/discovery"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/cache"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
@@ -256,6 +258,20 @@ func main() {
 		kingpin.FatalIfError(namespacedcontroller.Setup(mgr, namespacedOpts), "Cannot setup namespaced AzureAD controllers")
 	}
 	kingpin.FatalIfError(conversion.RegisterConversions(clusterOpts.Provider, namespacedOpts.Provider, mgr.GetScheme()), "Cannot initialize the webhook conversion registry")
+	discoveryClient, err := discovery.NewDiscoveryClientForConfig(cfg)
+	if err != nil {
+		logr.Info("Failed to create discovery client, skipping the storage version migration", "err", err)
+	} else {
+		// Create a non-cached client for the migration since the manager cache hasn't started yet
+		directClient, err := client.New(cfg, client.Options{Scheme: mgr.GetScheme()})
+		if err != nil {
+			logr.Info("Failed to create direct client for storage version migration", "err", err)
+		} else {
+			if err = clusterProvider.StorageVersionMigrator.Run(ctx, logr, discoveryClient, directClient); err != nil {
+				logr.Info("Failed to run storage version migrator", "err", err)
+			}
+		}
+	}
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }
 

@@ -6,10 +6,9 @@ package config
 
 import (
 	"context"
-	"strings"
-
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
+	"strings"
 
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/config/conversion"
@@ -19,7 +18,6 @@ import (
 	tfjson "github.com/hashicorp/terraform-json"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
-
 	"github.com/upbound/provider-azuread/v2/config/cluster/administrativeunits"
 	"github.com/upbound/provider-azuread/v2/config/cluster/app"
 	"github.com/upbound/provider-azuread/v2/config/cluster/applications"
@@ -139,6 +137,7 @@ func GetProvider(ctx context.Context, sdkProvider *schema.Provider, generationPr
 	}
 
 	pc.ConfigureResources()
+	ujconfig.PrepareCRDsMigrator(pc)
 	return pc, nil
 }
 
@@ -174,22 +173,21 @@ func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
 			r.PreviousVersions = []string{"v1beta1"}
 			// we would like to set the storage version to v1beta1 to facilitate
 			// downgrades.
-			r.SetCRDStorageVersion("v1beta1")
+			r.SetCRDStorageVersion(r.Version)
 			// because the controller reconciles on the API version with the singleton list API,
 			// no need for a Terraform conversion.
-			r.ControllerReconcileVersion = "v1beta1"
+			r.ControllerReconcileVersion = r.Version
 			r.Conversions = []conversion.Conversion{
 				conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
 				conversion.NewSingletonListConversion("v1beta1", "v1beta2", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
 				conversion.NewSingletonListConversion("v1beta2", "v1beta1", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList)}
-		} else {
-			// the controller will be reconciling on the CRD API version
-			// with the converted API (with embedded objects in place of
-			// singleton lists), so we need the appropriate Terraform
-			// converter in this case.
-			r.TerraformConversions = []ujconfig.TerraformConversion{
-				ujconfig.NewTFSingletonConversion(),
-			}
+		}
+		// the controller will be reconciling on the CRD API version
+		// with the converted API (with embedded objects in place of
+		// singleton lists), so we need the appropriate Terraform
+		// converter in this case.
+		r.TerraformConversions = []ujconfig.TerraformConversion{
+			ujconfig.NewTFSingletonConversion(),
 		}
 		pc.Resources[name] = r
 	}
